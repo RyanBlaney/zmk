@@ -25,6 +25,8 @@
 #define HID_USAGE16(idx)                                                                           \
     HID_ITEM(HID_ITEM_TAG_USAGE, HID_ITEM_TYPE_LOCAL, 2), (idx & 0xFF), (idx >> 8 & 0xFF)
 
+static int mouse_sensitivity;
+
 static const uint8_t zmk_mouse_hid_report_desc[] = {
     HID_USAGE_PAGE(HID_USAGE_GD),
     HID_USAGE(HID_USAGE_GD_MOUSE),

@@ -9,6 +9,18 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include <zmk/mouse/hid.h>
 
+void zmk_hid_mouse_increase_sensitivity(void) {
+    mouse_sensitivity++;
+    LOG_INF("Mouse sensitivity increased to %d", mouse_sensitivity);
+}
+
+void zmk_hid_mouse_decrease_sensitivity(void) {
+    if (mouse_sensitivity > 1) {
+        mouse_sensitivity--;
+        LOG_INF("Mouse sensitivity decreased to %d", mouse_sensitivity);
+    }
+}
+
 static struct zmk_hid_mouse_report mouse_report = {
     .report_id = ZMK_MOUSE_HID_REPORT_ID_MOUSE,
     .body = {.buttons = 0, .d_x = 0, .d_y = 0, .d_scroll_y = 0}};
@@ -74,22 +86,22 @@ int zmk_hid_mouse_buttons_release(zmk_mouse_button_flags_t buttons) {
 }
 
 void zmk_hid_mouse_movement_set(int16_t x, int16_t y) {
-    mouse_report.body.d_x = x;
-    mouse_report.body.d_y = y;
+    mouse_report.body.d_x = x * mouse_sensitivity;
+    mouse_report.body.d_y = y * mouse_sensitivity;
     LOG_DBG("Mouse movement set to %d/%d", mouse_report.body.d_x, mouse_report.body.d_y);
+}
+
+void zmk_hid_mouse_scroll_set(int8_t x, int8_t y) {
+    mouse_report.body.d_scroll_x = x * mouse_sensitivity;
+    mouse_report.body.d_scroll_y = y * mouse_sensitivity;
+    LOG_DBG("Mouse scroll set to %d/%d", mouse_report.body.d_scroll_x,
+            mouse_report.body.d_scroll_y);
 }
 
 void zmk_hid_mouse_movement_update(int16_t x, int16_t y) {
     mouse_report.body.d_x += x;
     mouse_report.body.d_y += y;
     LOG_DBG("Mouse movement updated to %d/%d", mouse_report.body.d_x, mouse_report.body.d_y);
-}
-
-void zmk_hid_mouse_scroll_set(int8_t x, int8_t y) {
-    mouse_report.body.d_scroll_x = x;
-    mouse_report.body.d_scroll_y = y;
-    LOG_DBG("Mouse scroll set to %d/%d", mouse_report.body.d_scroll_x,
-            mouse_report.body.d_scroll_y);
 }
 
 void zmk_hid_mouse_scroll_update(int8_t x, int8_t y) {
@@ -104,6 +116,4 @@ void zmk_hid_mouse_clear(void) {
     memset(&mouse_report.body, 0, sizeof(mouse_report.body));
 }
 
-struct zmk_hid_mouse_report *zmk_mouse_hid_get_mouse_report(void) {
-    return &mouse_report;
-}
+struct zmk_hid_mouse_report *zmk_mouse_hid_get_mouse_report(void) { return &mouse_report; }

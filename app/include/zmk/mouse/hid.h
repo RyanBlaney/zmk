@@ -85,4 +85,7 @@ void zmk_hid_mouse_movement_update(int16_t x, int16_t y);
 void zmk_hid_mouse_scroll_update(int8_t x, int8_t y);
 void zmk_hid_mouse_clear(void);
 
+void zmk_hid_mouse_increase_sensitivity(void);
+void zmk_hid_mouse_decrease_sensitivity(void);
+
 struct zmk_hid_mouse_report *zmk_mouse_hid_get_mouse_report();

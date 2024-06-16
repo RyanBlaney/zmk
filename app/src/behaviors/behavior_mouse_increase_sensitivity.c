@@ -1,5 +1,4 @@
 
-
 #define DT_DRV_COMPAT zmk_behavior_mouse_increase_sensitivity
 
 #include <zephyr/device.h>
@@ -9,6 +8,8 @@
 #include <zmk/mouse/hid.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
+
+#if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
 
 static int behavior_mouse_increase_sensitivity_init(const struct device *dev) { return 0; }
 
@@ -34,3 +35,5 @@ static const struct behavior_driver_api behavior_mouse_increase_sensitivity_driv
                             &behavior_mouse_increase_sensitivity_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(MKP_INST)
+
+#endif

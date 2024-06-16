@@ -1,0 +1,6 @@
+
+description: Mouse increase sensitivity behavior
+
+compatible: "zmk,behavior-mouse-increase-sensitivity"
+
+include: zero_param.yaml

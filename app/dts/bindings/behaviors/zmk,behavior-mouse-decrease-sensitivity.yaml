@@ -1,0 +1,6 @@
+
+description: Mouse decrease sensitivity behavior
+
+compatible: "zmk,behavior-mouse-decrease-sensitivity"
+
+include: zero_param.yaml

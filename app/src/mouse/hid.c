@@ -9,12 +9,12 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include <zmk/mouse/hid.h>
 
-void zmk_hid_mouse_increase_sensitivity(void) {
+void zmk_mouse_increase_sensitivity(void) {
     mouse_sensitivity++;
     LOG_INF("Mouse sensitivity increased to %d", mouse_sensitivity);
 }
 
-void zmk_hid_mouse_decrease_sensitivity(void) {
+void zmk_mouse_decrease_sensitivity(void) {
     if (mouse_sensitivity > 1) {
         mouse_sensitivity--;
         LOG_INF("Mouse sensitivity decreased to %d", mouse_sensitivity);

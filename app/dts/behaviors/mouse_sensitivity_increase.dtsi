@@ -1,8 +1,0 @@
-
-/ {
-    zmk,behavior-increase-sensitivity {
-        compatible = "zmk,behavior";
-        label = "MOUSE_SENS_INCREASE";
-        bindings = <&zmk_mouse_increase_sensitivity>;
-    };
-};

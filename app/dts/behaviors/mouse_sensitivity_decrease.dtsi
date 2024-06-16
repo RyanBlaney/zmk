@@ -1,8 +1,0 @@
-
-/ {
-    zmk,behavior-decrease-sensitivity {
-        compatible = "zmk,behavior";
-        label = "MOUSE_SENS_DECREASE";
-        bindings = <&zmk_mouse_decrease_sensitivity>;
-    };
-};

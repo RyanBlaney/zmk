@@ -3,12 +3,12 @@
     behaviors {
         inc_sens: zmk_mouse_increase_sensitivity {
             compatible = "zmk,behavior-mouse-increase-sensitivity";
-            label = "MOUSE_SENS_INCREASE";
+            #binding-cells = <0>;
         };
 
         dec_sens: zmk_mouse_decrease_sensitivity {
             compatible = "zmk,behavior-mouse-decrease-sensitivity";
-            label = "MOUSE_SENS_DECREASE";
+            #binding-cells = <0>;
         };
     };
 };

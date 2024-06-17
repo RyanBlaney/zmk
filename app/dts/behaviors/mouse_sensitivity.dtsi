@@ -1,14 +1,13 @@
 
-#include <dt-bindings/zmk/keys.h>
 
 / {
     behaviors {
-        /omit-if-no-refs/ inc_sens: zmk_mouse_increase_sensitivity {
+        inc_sens: zmk_mouse_increase_sensitivity {
             compatible = "zmk,behavior-mouse-increase-sensitivity";
             #binding-cells = <0>;
         };
 
-        /omit-if-no-refs/ dec_sens: zmk_mouse_decrease_sensitivity {
+        dec_sens: zmk_mouse_decrease_sensitivity {
             compatible = "zmk,behavior-mouse-decrease-sensitivity";
             #binding-cells = <0>;
         };

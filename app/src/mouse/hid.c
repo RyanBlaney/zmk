@@ -88,21 +88,21 @@ int zmk_hid_mouse_buttons_release(zmk_mouse_button_flags_t buttons) {
 }
 
 void zmk_hid_mouse_movement_set(int16_t x, int16_t y) {
-    mouse_report.body.d_x = x;
-    mouse_report.body.d_y = y;
+    mouse_report.body.d_x = x * mouse_sensitivity;
+    mouse_report.body.d_y = y * mouse_sensitivity;
     LOG_DBG("Mouse movement set to %d/%d", mouse_report.body.d_x, mouse_report.body.d_y);
 }
 
 void zmk_hid_mouse_scroll_set(int8_t x, int8_t y) {
-    mouse_report.body.d_scroll_x = x * mouse_sensitivity;
-    mouse_report.body.d_scroll_y = y * mouse_sensitivity;
+    mouse_report.body.d_scroll_x = x;
+    mouse_report.body.d_scroll_y = y;
     LOG_DBG("Mouse scroll set to %d/%d", mouse_report.body.d_scroll_x,
             mouse_report.body.d_scroll_y);
 }
 
 void zmk_hid_mouse_movement_update(int16_t x, int16_t y) {
-    mouse_report.body.d_x += x * mouse_sensitivity;
-    mouse_report.body.d_y += y * mouse_sensitivity;
+    mouse_report.body.d_x += x;
+    mouse_report.body.d_y += y;
     LOG_DBG("Mouse movement updated to %d/%d", mouse_report.body.d_x, mouse_report.body.d_y);
 }
 

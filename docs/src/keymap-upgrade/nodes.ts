@@ -11,6 +11,8 @@ const NODES = {
   "/behaviors/behavior_ext_power": "extpower",
   "/behaviors/behavior_key_press": "key_press",
   "/behaviors/behavior_key_repeat": "key_repeat",
+  "/behaviors/behavior_mouse_increase_sensitivity": "inc_sens",
+  "/behaviors/behavior_mouse_decrease_sensitivity": "dec_sens",
   "/behaviors/behavior_key_toggle": "key_toggle",
   "/behaviors/behavior_layer_tap": "layer_tap",
   "/behaviors/behavior_mod_tap": "mod_tap",

@@ -46,7 +46,7 @@ static int position_state_changed_listener(const zmk_event_t *eh) {
 }
 
 ZMK_LISTENER(behavior_layer_switched_key_repeat, position_state_changed_listener);
-ZMK_SUBSCRIPTION(behavior_layer_switched_key_repeat, zmk_position_state_changed_listener);
+ZMK_SUBSCRIPTION(behavior_layer_switched_key_repeat, zmk_position_state_changed);
 
 static int behavior_layer_switched_key_repeat_init(const device_t *dev) {
     return 0;
@@ -61,7 +61,7 @@ static int on_layer_switched_key_repeat_binding_pressed(struct zmk_behavior_bind
         return ZMK_EV_EVENT_BUBBLE;
     }
 
-    uint8_layer layer = binding->param1;
+    uint8_t layer = binding->param1;
 
     LOG_DBG("Layer switched key repeat pressed, position: %d, target layer: %d", 
                                                         data.position, layer);
@@ -99,8 +99,8 @@ static int on_layer_switched_key_repeat_binding_released(struct zmk_behavior_bin
     if (ret) return ret;
 
     struct zmk_behavior_binding_event target_event = {
-        .position = event.position;
-        .timestamp = event.timestamp;
+        .position = event.position,
+        .timestamp = event.timestamp,
     };
 
     return behavior_keymap_binding_released(&target_binding, target_event);

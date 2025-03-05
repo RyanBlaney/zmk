@@ -48,9 +48,7 @@ static int position_state_changed_listener(const zmk_event_t *eh) {
 ZMK_LISTENER(behavior_layer_switched_key_repeat, position_state_changed_listener);
 ZMK_SUBSCRIPTION(behavior_layer_switched_key_repeat, zmk_position_state_changed);
 
-static int behavior_layer_switched_key_repeat_init(const device_t *dev) {
-    return 0;
-}
+static int behavior_layer_switched_key_repeat_init(const device_t *dev) { return 0; }
 
 static int on_layer_switched_key_repeat_binding_pressed(struct zmk_behavior_binding *binding,
                                                         struct zmk_behavior_binding_event event) {
@@ -63,16 +61,15 @@ static int on_layer_switched_key_repeat_binding_pressed(struct zmk_behavior_bind
 
     uint8_t layer = binding->param1;
 
-    LOG_DBG("Layer switched key repeat pressed, position: %d, target layer: %d", 
-                                                        data.position, layer);
+    LOG_DBG("Layer switched key repeat pressed, position: %d, target layer: %d", data.position,
+            layer);
 
     // Get the key binding from the target layer at the last pressed position
     struct zmk_behavior_binding target_binding;
     int ret = zmk_keymap_binding_for_position(data.position, layer, &target_binding);
 
     if (ret) {
-        LOG_WRN("Failed to get binding at position %d for layer %d: %d", 
-                data.position, layer, ret);
+        LOG_WRN("Failed to get binding at position %d for layer %d: %d", data.position, layer, ret);
         return ret;
     }
 
@@ -85,7 +82,7 @@ static int on_layer_switched_key_repeat_binding_pressed(struct zmk_behavior_bind
 }
 
 static int on_layer_switched_key_repeat_binding_released(struct zmk_behavior_binding *binding,
-                                                        struct zmk_behavior_binding_event event) {
+                                                         struct zmk_behavior_binding_event event) {
     const device_t *dev = device_get_binding(binding->behavior_dev);
 
     if (!data.has_position)
@@ -96,7 +93,8 @@ static int on_layer_switched_key_repeat_binding_released(struct zmk_behavior_bin
     struct zmk_behavior_binding target_binding;
     int ret = zmk_keymap_binding_for_position(data.position, layer, &target_binding);
 
-    if (ret) return ret;
+    if (ret)
+        return ret;
 
     struct zmk_behavior_binding_event target_event = {
         .position = event.position,
@@ -111,13 +109,14 @@ static const struct behavior_driver_api behavior_layer_switched_key_repeat_drive
     .binding_released = on_layer_switched_key_repeat_binding_released,
 };
 
-#define KR_INST(n) \
-    static const struct behavior_layer_switched_key_repeat_config behavior_layer_switched_key_repeat_config_##n = { \
-        .param_layers = DT_INST_PROP(n, param_layers), \
-    }; \
-    DEVICE_DT_INST_DEFINE(n, behavior_layer_switched_key_repeat_init, NULL, NULL, \
-                         &behavior_layer_switched_key_repeat_config_##n, \
-                         POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, \
-                         &behavior_layer_switched_key_repeat_driver_api);
+#define KR_INST(n)                                                                                 \
+    static const struct behavior_layer_switched_key_repeat_config                                  \
+        behavior_layer_switched_key_repeat_config_##n = {                                          \
+            .param_layers = DT_INST_PROP(n, param_layers),                                         \
+    };                                                                                             \
+    DEVICE_DT_INST_DEFINE(n, behavior_layer_switched_key_repeat_init, NULL, NULL,                  \
+                          &behavior_layer_switched_key_repeat_config_##n, POST_KERNEL,             \
+                          CONFIG_KERNEL_INIT_PRIORITY_DEFAULT,                                     \
+                          &behavior_layer_switched_key_repeat_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(KR_INST)

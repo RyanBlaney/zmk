@@ -1,0 +1,18 @@
+/*
+ * Copyright (c) 2025 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <dt-bindings/zmk/keys.h>
+
+/ {
+    behaviors {
+        /omit-if-no-ref/ lskey_repeat: layer_switched_key_repeat {
+            compatible = "zmk,behavior-key-repeat";
+            #binding-cells = <1>;
+            param_layers = <1>; // default 1 if no parameter provided
+        };
+    };
+};
+

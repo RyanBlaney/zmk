@@ -1,0 +1,5 @@
+description: Repeat key position in a new layer behavior
+
+compatible: "zmk,behavior-layer-switched-key-repeat"
+
+include: one_param.yaml

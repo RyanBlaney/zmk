@@ -32,7 +32,7 @@ static const struct behavior_driver_api behavior_mouse_increase_sensitivity_driv
 #define MKP_INST(n)                                                                                \
     BEHAVIOR_DT_INST_DEFINE(n, behavior_mouse_increase_sensitivity_init, NULL, NULL, NULL,         \
                             POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT,                      \
-                            &behavior_mouse_increase_sensitivity_driver_api);
+                            &behavior_increase_sensitivity_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(MKP_INST)
 
